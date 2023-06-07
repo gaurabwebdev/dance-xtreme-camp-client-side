@@ -26,7 +26,7 @@ const Login = () => {
           />
           <h1 className="text-5xl font-bold">Login Now!</h1>
         </div>
-        <div className="card w-full lg:max-w-md shadow-2xl bg-base-100 bg-cover bg-center bg-no-repeat">
+        <div className="card w-full md:max-w-lg shadow-2xl bg-base-100 ">
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
