@@ -53,9 +53,16 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <Link>
-            <button className="btn btn-active btn-neutral">Login</button>
-          </Link>
+          <div>
+            <Link>
+              <button className="btn btn-outline btn-secondary">Login</button>
+            </Link>
+            <Link to={"/registration"}>
+              <button className="btn btn-active btn-secondary ml-4">
+                Sign Up
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
