@@ -231,12 +231,12 @@ const Registration = () => {
               </div>
             </form>
             <label className="label">
-              <span className="">Don't Have An Account?</span>
+              <span className="">Already Have Account?</span>
               <Link
-                to={"/registration"}
+                to={"/login"}
                 className=" link link-hover hover:text-secondary hover:no-underline"
               >
-                Create An Account
+                Log into Your Account
               </Link>
             </label>
           </div>
