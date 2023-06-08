@@ -23,12 +23,13 @@ const useAxios = () => {
       (response) => response,
       async (error) => {
         if (
-          (error.response && error.response === 401) ||
-          error.response === 403
+          error.response &&
+          (error.response === 401 || error.response === 403)
         ) {
           await userLogOut();
           navigate("/login");
         }
+        return Promise.reject(error);
       }
     );
   }, [userLogOut, navigate, axiosSecure]);

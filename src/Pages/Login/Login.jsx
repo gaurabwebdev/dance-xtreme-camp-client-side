@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Components/Shared/SocialLogin/SocialLogin";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -16,6 +17,8 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   return (
     <div>
       <div className="hero-content flex-col  justify-around items-center m-5 lg:m-20">

@@ -49,14 +49,14 @@ const AuthProvider = ({ children }) => {
     const checkUser = () => {
       onAuthStateChanged(auth, (presentUser) => {
         console.log(presentUser);
+        setUser(presentUser);
         if (presentUser) {
-          setUser(presentUser);
-
           axios
-            .get("http://localhost:5000/jwt", { email: presentUser.email })
+            .post("http://localhost:5000/jwt", { email: presentUser?.email })
             .then((data) => {
               if (data.data.jwToken) {
-                localStorage.setItem("accessJwt");
+                console.log(data.data);
+                localStorage.setItem("accessJwt", data.data.jwToken);
               }
             })
             .catch((error) => {
