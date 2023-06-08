@@ -2,29 +2,60 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHeartbeat } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
+  const { createUser, setUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const {
-      Gender,
-      address,
-      confirmPassword,
-      contact_number,
-      email,
-      first_name,
-      last_name,
-      password,
-      photo_url,
-    } = data;
+    if (data) {
+      const {
+        Gender,
+        address,
+        confirmPassword,
+        contact_number,
+        email,
+        first_name,
+        last_name,
+        password,
+        photo_url,
+      } = data;
+
+      createUser(email, password)
+        .then((result) => {
+          const createdUser = result.user;
+          if (createdUser) {
+            setUserProfile(first_name, last_name, photo_url)
+              .then(() => {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Account Created Successfully",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              })
+              .then((error) => {
+                if (error) {
+                  console.log(error);
+                }
+              });
+          }
+        })
+        .then((error) => {
+          if (error) {
+            console.log(error);
+          }
+        });
+    }
   };
   return (
     <div>

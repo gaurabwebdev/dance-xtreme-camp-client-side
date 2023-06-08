@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const setUserProfile = (first_name, last_name, photo_url) => {
-    const fullName = first_name + last_name;
+    const fullName = first_name + " " + last_name;
     return updateProfile(auth.currentUser, {
       displayName: fullName,
       photoURL: photo_url,
