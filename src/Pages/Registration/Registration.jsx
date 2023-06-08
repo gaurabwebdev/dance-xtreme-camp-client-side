@@ -42,6 +42,27 @@ const Registration = () => {
                   showConfirmButton: false,
                   timer: 2000,
                 });
+                const newUser = {
+                  first_name,
+                  last_name,
+                  email,
+                  photo_url,
+                  address,
+                  Gender,
+                };
+                fetch("http://localhost:5000/post", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(newUser),
+                })
+                  .then((res) => {
+                    console.log(res);
+                  })
+                  .then((error) => {
+                    console.log(error.message);
+                  });
               })
               .then((error) => {
                 if (error) {
