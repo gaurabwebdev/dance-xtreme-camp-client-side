@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Components/Shared/SocialLogin/SocialLogin";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
@@ -11,6 +11,9 @@ import useAuth from "../../Hooks/useAuth";
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const { userLogin } = useAuth();
+  const location = useLocation();
+  const targetRoute = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,10 +22,10 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     userLogin(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        navigate(targetRoute, { replace: true });
       })
       .then((error) => {
         if (error) {
@@ -30,10 +33,7 @@ const Login = () => {
         }
       });
   };
-  const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
-  console.log("admin ", isAdmin);
-  console.log("instructor", isInstructor);
+
   return (
     <div>
       <div className="hero-content flex-col  justify-around items-center m-5 lg:m-20">

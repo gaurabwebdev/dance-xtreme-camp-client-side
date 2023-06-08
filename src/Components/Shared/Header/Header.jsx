@@ -32,8 +32,8 @@ const Header = () => {
     </>
   );
   return (
-    <header className="px-8 py-4">
-      <div className="navbar bg-base-100">
+    <header className="">
+      <div className="navbar bg-gray-100 p-3 md:px-8 md:py-4">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -80,12 +80,19 @@ const Header = () => {
                 />
               </div>
 
-              <button
-                onClick={handleLogOut}
-                className="btn btn-active btn-secondary ml-4"
-              >
-                Log Out
-              </button>
+              <div className="flex flex-col-reverse  justify-center gap-1">
+                <Link>
+                  <button className="btn btn-outline btn-xs btn-secondary ml-4">
+                    Dashboard
+                  </button>
+                </Link>
+                <button
+                  onClick={handleLogOut}
+                  className="btn btn-active btn-xs btn-secondary ml-4"
+                >
+                  Log Out
+                </button>
+              </div>
             </div>
           ) : (
             <div>
