@@ -62,11 +62,17 @@ const Header = () => {
         <div className="navbar-end">
           {user ? (
             <div className="flex justify-center items-center gap-2">
-              <img
-                className="w-12 h-12 rounded-full cursor-pointer"
-                src={user.photoURL || "https://i.ibb.co/Yhn8Q8H/user.png"}
-                alt=""
-              />
+              <div
+                className="tooltip tooltip-secondary  tooltip-bottom"
+                data-tip={user.displayName}
+              >
+                <img
+                  className="w-12 h-12 rounded-full cursor-pointer"
+                  src={user.photoURL || "https://i.ibb.co/Yhn8Q8H/user.png"}
+                  alt=""
+                />
+              </div>
+
               <button
                 onClick={handleLogOut}
                 className="btn btn-active btn-secondary ml-4"
