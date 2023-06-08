@@ -36,6 +36,7 @@ const Registration = () => {
         photo_url,
         address,
         Gender,
+        role: "student",
       };
 
       createUser(email, password)
