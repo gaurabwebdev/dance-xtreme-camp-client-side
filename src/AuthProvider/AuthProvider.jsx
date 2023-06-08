@@ -12,11 +12,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const authInfo = {
-    user,
-    createUser,
-    loading,
-  };
+
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -26,12 +22,18 @@ const AuthProvider = ({ children }) => {
       onAuthStateChanged(auth, (presentUser) => {
         console.log(presentUser);
         setUser(presentUser);
+        setLoading(false);
       });
     };
     return () => {
       checkUser();
     };
   }, []);
+  const authInfo = {
+    user,
+    createUser,
+    loading,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
