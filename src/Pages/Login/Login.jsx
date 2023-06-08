@@ -5,20 +5,35 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Components/Shared/SocialLogin/SocialLogin";
 import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
+  const { userLogin } = useAuth();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
+    userLogin(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .then((error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
   };
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
+  const [isInstructor] = useInstructor();
+  console.log("admin ", isAdmin);
+  console.log("instructor", isInstructor);
   return (
     <div>
       <div className="hero-content flex-col  justify-around items-center m-5 lg:m-20">

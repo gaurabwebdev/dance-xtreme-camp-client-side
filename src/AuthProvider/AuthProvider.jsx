@@ -55,7 +55,6 @@ const AuthProvider = ({ children }) => {
             .post("http://localhost:5000/jwt", { email: presentUser?.email })
             .then((data) => {
               if (data.data.jwToken) {
-                console.log(data.data);
                 localStorage.setItem("accessJwt", data.data.jwToken);
               }
             })
