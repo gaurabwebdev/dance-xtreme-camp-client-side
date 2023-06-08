@@ -81,7 +81,7 @@ const Header = () => {
               </div>
 
               <div className="flex flex-col-reverse  justify-center gap-1">
-                <Link>
+                <Link to={"/dashboard"}>
                   <button className="btn btn-outline btn-xs btn-secondary ml-4">
                     Dashboard
                   </button>

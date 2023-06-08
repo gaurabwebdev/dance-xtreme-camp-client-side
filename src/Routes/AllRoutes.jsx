@@ -4,6 +4,8 @@ import Main from "../Layouts/Main/Main";
 import Home from "../Pages/Home/Home/Home";
 import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
+import Dashboard from "../Layouts/Dashboard/Dashboard";
+import DashboardContent from "../Pages/DashboardContent/DashboardContent";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -21,6 +23,16 @@ const AllRoutes = createBrowserRouter([
       {
         path: "/registration",
         element: <Registration />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardContent />,
       },
     ],
   },

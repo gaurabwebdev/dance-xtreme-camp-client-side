@@ -1,11 +1,12 @@
 import React from "react";
 import useAuth from "../../../Hooks/useAuth";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const SocialLogin = () => {
+const SocialLogin = ({ targetRoute }) => {
   const { googleLogin } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const handleGoogleLogin = () => {
@@ -38,6 +39,8 @@ const SocialLogin = () => {
               console.log(error.message);
             }
           });
+
+        navigate(targetRoute || "/");
       })
       .then((error) => {
         if (error) {

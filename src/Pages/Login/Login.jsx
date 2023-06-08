@@ -112,7 +112,7 @@ const Login = () => {
                 Create An Account
               </Link>
             </label>
-            <SocialLogin />
+            <SocialLogin targetRoute={targetRoute} />
           </div>
         </div>
       </div>
