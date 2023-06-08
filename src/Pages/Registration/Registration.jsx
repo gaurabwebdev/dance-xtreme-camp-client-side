@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash, FaHeartbeat } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
+import axios from "axios";
 
 const Registration = () => {
   const [showPass, setShowPass] = useState(false);
@@ -55,15 +56,15 @@ const Registration = () => {
                   timer: 2000,
                 });
 
-                axiosSecure
+                axios
                   .post("/users", newUser)
                   .then((data) => {
-                    console.log(data);
+                    if (data.data.inserteId) {
+                      console.log(data);
+                    }
                   })
                   .catch((error) => {
-                    if (error) {
-                      console.log(error.message);
-                    }
+                    console.log(error.message);
                   });
               })
               .then((error) => {
