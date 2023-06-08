@@ -8,6 +8,7 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
+      // TODO :: Set a lottie animation on loading
       <div className="w-full h-full">
         <progress className="progress w-56"></progress>
       </div>

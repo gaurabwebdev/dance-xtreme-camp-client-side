@@ -38,7 +38,7 @@ const Dashboard = () => {
             <Link>Manage Classes</Link>
           </li>
           <li>
-            <Link>Manage Users</Link>
+            <Link to={"/dashboard/allusers"}>Manage Users</Link>
           </li>
         </>
       )}
@@ -52,12 +52,12 @@ const Dashboard = () => {
         <div className="drawer-content">
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
+            className="btn btn-secondary drawer-button lg:hidden mt-3 ml-3"
           >
-            Open drawer
+            Dashboard Menu
           </label>
           {/* Page content here */}
-          <div>
+          <div className="m-3">
             <Outlet />
           </div>
         </div>

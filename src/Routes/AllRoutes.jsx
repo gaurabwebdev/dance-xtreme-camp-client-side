@@ -6,6 +6,9 @@ import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import DashboardContent from "../Pages/DashboardContent/DashboardContent";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import AllUsers from "../Pages/DashboardContent/AllUsers";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -32,7 +35,19 @@ const AllRoutes = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <DashboardContent />,
+        element: (
+          <PrivateRoute>
+            <DashboardContent />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
     ],
   },
