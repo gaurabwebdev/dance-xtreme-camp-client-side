@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHeartbeat } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxios from "../../Hooks/useAxios";
 
 const Registration = () => {
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
   const { createUser, setUserProfile } = useAuth();
+  const [axiosSecure] = useAxios();
   const {
     register,
     handleSubmit,
@@ -53,16 +55,15 @@ const Registration = () => {
                   timer: 2000,
                 });
 
-                fetch("http://localhost:5000/users", {
-                  method: "POST",
-                  headers: {
-                    "content-type": "application/json",
-                  },
-                  body: JSON.stringify(newUser),
-                })
-                  .then((res) => res.json())
+                axiosSecure
+                  .post("/users", newUser)
                   .then((data) => {
                     console.log(data);
+                  })
+                  .catch((error) => {
+                    if (error) {
+                      console.log(error.message);
+                    }
                   });
               })
               .then((error) => {

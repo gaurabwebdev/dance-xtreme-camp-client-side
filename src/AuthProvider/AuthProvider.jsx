@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -40,8 +41,26 @@ const AuthProvider = ({ children }) => {
     const checkUser = () => {
       onAuthStateChanged(auth, (presentUser) => {
         console.log(presentUser);
-        setUser(presentUser);
-        setLoading(false);
+        if (presentUser) {
+          setUser(presentUser);
+
+          axios
+            .post("http://localhost:5000/jwt", { email: presentUser.email })
+            .then((data) => {
+              if (data.data.jwToken) {
+                localStorage.setItem("accessJwt");
+              }
+            })
+            .catch((error) => {
+              if (error) {
+                console.log(error.message);
+              }
+            });
+
+          setLoading(false);
+        } else {
+          localStorage.removeItem("accessJwt");
+        }
       });
     };
     return () => {
