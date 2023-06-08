@@ -14,6 +14,17 @@ const Registration = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    const {
+      Gender,
+      address,
+      confirmPassword,
+      contact_number,
+      email,
+      first_name,
+      last_name,
+      password,
+      photo_url,
+    } = data;
   };
   return (
     <div>
