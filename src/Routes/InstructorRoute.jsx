@@ -2,12 +2,10 @@ import React from "react";
 import useAuth from "../Hooks/useAuth";
 import useInstructor from "../Hooks/useInstructor";
 import { Navigate } from "react-router";
-import useAdmin from "../Hooks/useAdmin";
 
 const InstructorRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isInstructor, isInstructorLoading] = useInstructor();
-  const [isAdmin, isAdminLoading] = useAdmin();
   if (loading || isInstructorLoading || isAdminLoading) {
     return (
       <div className="w-full h-full">
@@ -15,7 +13,7 @@ const InstructorRoute = ({ children }) => {
       </div>
     );
     // TODO:: remove isAdmin
-  } else if ((user && isInstructor) || isAdmin) {
+  } else if (user && isInstructor) {
     return children;
   }
   return <Navigate to={"/"} replace></Navigate>;
