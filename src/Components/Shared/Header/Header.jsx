@@ -1,12 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 const Header = () => {
   const { user, userLogOut } = useAuth();
+  const navigate = useNavigate();
   const handleLogOut = () => {
     userLogOut()
-      .then(() => {})
-      .then(() => {});
+      .then(() => {
+        navigate("/login");
+      })
+      .then((error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
   };
   const menuItems = (
     <>

@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const { googleLogin } = useAuth();
@@ -23,7 +24,13 @@ const SocialLogin = () => {
           .post("http://localhost:5000/users", newUser)
           .then((data) => {
             if (data.data.insertedId) {
-              console.log(data);
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Account Created Successfully",
+                showConfirmButton: false,
+                timer: 2000,
+              });
             }
           })
           .catch((error) => {
