@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
+import SocialLogin from "../../Components/Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -93,6 +94,7 @@ const Login = () => {
                 Create An Account
               </Link>
             </label>
+            <SocialLogin />
           </div>
         </div>
       </div>

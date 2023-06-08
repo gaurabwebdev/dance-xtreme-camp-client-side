@@ -6,12 +6,16 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
+  signInWithPopup,
 } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
+const gProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -31,6 +35,10 @@ const AuthProvider = ({ children }) => {
 
   const userLogin = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const googleLogin = () => {
+    return signInWithPopup(auth, gProvider);
   };
 
   const userLogOut = () => {
@@ -72,6 +80,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     userLogin,
+    googleLogin,
     setUserProfile,
     userLogOut,
   };

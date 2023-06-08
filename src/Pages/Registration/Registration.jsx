@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHeartbeat } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxios from "../../Hooks/useAxios";
 import axios from "axios";
+import SocialLogin from "../../Components/Shared/SocialLogin/SocialLogin";
 
 const Registration = () => {
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
   const { createUser, setUserProfile } = useAuth();
-  const [axiosSecure] = useAxios();
   const {
     register,
     handleSubmit,
@@ -33,8 +32,7 @@ const Registration = () => {
       } = data;
 
       const newUser = {
-        first_name,
-        last_name,
+        name: first_name + " " + last_name,
         email,
         photo_url,
         address,
@@ -57,9 +55,9 @@ const Registration = () => {
                 });
 
                 axios
-                  .post("/users", newUser)
+                  .post("http://localhost:5000/users", newUser)
                   .then((data) => {
-                    if (data.data.inserteId) {
+                    if (data.data.insertedId) {
                       console.log(data);
                     }
                   })
@@ -305,6 +303,7 @@ const Registration = () => {
                 Log into Your Account
               </Link>
             </label>
+            <SocialLogin />
           </div>
         </div>
       </div>
