@@ -3,6 +3,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
@@ -15,6 +17,18 @@ const AuthProvider = ({ children }) => {
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const setUserProfile = (first_name, last_name, photo_url) => {
+    const fullName = first_name + last_name;
+    return updateProfile(auth.currentUser, {
+      displayName: fullName,
+      photoURL: photo_url,
+    });
+  };
+
+  const userLogin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   useEffect(() => {
@@ -31,8 +45,10 @@ const AuthProvider = ({ children }) => {
   }, []);
   const authInfo = {
     user,
-    createUser,
     loading,
+    createUser,
+    userLogin,
+    setUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
