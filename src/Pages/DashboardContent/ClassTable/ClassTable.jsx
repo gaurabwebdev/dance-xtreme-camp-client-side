@@ -1,12 +1,35 @@
 import React, { useState } from "react";
 import getInstructorClasses from "../../../Hooks/getInstructorClasses";
 import { useLocation } from "react-router-dom";
+import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ClassTable = ({ classes }) => {
   const location = useLocation();
   console.log(location);
   // /dashboard/all-classes
   const [currentClass, setCurrentClass] = useState({});
+  const [axiosSecure] = useAxios();
+  const approveClass = (classId, newStatus) => {
+    axiosSecure
+      .patch(`/classes?classId=${classId}&newStatus=${newStatus}`)
+      .then((data) => {
+        if (data.data.modifiedCount > 0) {
+          console.log(data);
+          Swal.fire(`Course Approved!`, `You clicked the button!`, `success`);
+        }
+      });
+  };
+
+  // TODO :: Set Deny API
+  // const denyClass = (changedStatus) => {
+  //   console.log(changedStatus);
+  //   axiosSecure.patch(`/classes?status=${changedStatus}`).then((data) => {
+  //     if (data.data) {
+  //       console.log(data);
+  //     }
+  //   });
+  // };
   return (
     <div className="overflow-x-auto">
       <table className="table text-center">
@@ -99,13 +122,14 @@ const ClassTable = ({ classes }) => {
                       View Details
                     </button>
                     <button
-                      disabled={!classItem.status === "pending"}
+                      onClick={() => approveClass(classItem._id, "approve")}
+                      disabled={classItem.status === !"pending"}
                       className="btn btn-outline btn-secondary btn-xs"
                     >
                       Allow
                     </button>
                     <button
-                      disabled={!classItem.status === "pending"}
+                      disabled={classItem.status === !"pending"}
                       className="btn btn-outline btn-secondary btn-xs"
                     >
                       Deny
@@ -176,6 +200,7 @@ const ClassTable = ({ classes }) => {
           <dialog id="class_modal" className="modal">
             <form method="dialog" className="modal-box ">
               <button
+                onClick={() => setCurrentClass({})}
                 htmlFor="my-modal-3"
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 bg-secondary"
               >

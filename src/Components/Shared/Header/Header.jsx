@@ -7,7 +7,7 @@ const Header = () => {
   const handleLogOut = () => {
     userLogOut()
       .then(() => {
-        navigate("/login");
+        navigate("/");
       })
       .then((error) => {
         if (error) {
