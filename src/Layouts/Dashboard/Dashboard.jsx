@@ -28,7 +28,7 @@ const Dashboard = () => {
             <Link to={"/dashboard/add-a-class"}>Add A Class</Link>
           </li>
           <li>
-            <Link>My Classes</Link>
+            <Link to={"/dashboard/instructor-classes"}>My Classes</Link>
           </li>
         </>
       )}

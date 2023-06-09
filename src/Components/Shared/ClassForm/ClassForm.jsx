@@ -23,7 +23,6 @@ const ClassForm = () => {
       email,
       name,
       price,
-      role,
     } = data;
     const newCourse = {
       available_seats: parseFloat(available_seats),
@@ -33,7 +32,7 @@ const ClassForm = () => {
       email,
       name,
       price: parseFloat(price),
-      role: "pending",
+      status: "pending",
     };
     axiosSecure.post(`/classes`, newCourse).then((data) => {
       console.log(data);
