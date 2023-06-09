@@ -3,13 +3,12 @@ import getClasses from "../../Hooks/getClasses";
 import ClassTable from "./ClassTable/ClassTable";
 
 const AllClasses = () => {
-  const [allClasses] = getClasses();
-  console.log(allClasses);
+  const [allClasses, refetch] = getClasses();
   return (
     <div>
       <p>Total Classes: {allClasses?.length}</p>
       <div>
-        <ClassTable classes={allClasses} />
+        <ClassTable classes={allClasses} refetch={refetch} />
       </div>
     </div>
   );
