@@ -2,16 +2,49 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ClassForm = () => {
   const { user } = useAuth();
+  const [axiosSecure] = useAxios();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const {
+      available_seats,
+      class_img_url,
+      class_name,
+      description,
+      email,
+      name,
+      price,
+      role,
+    } = data;
+    const newCourse = {
+      available_seats: parseFloat(available_seats),
+      class_img_url,
+      class_name,
+      description,
+      email,
+      name,
+      price: parseFloat(price),
+      role: "pending",
+    };
+    axiosSecure.post(`/classes`, newCourse).then((data) => {
+      console.log(data);
+      if (data.data.insertedId) {
+        Swal.fire(
+          `New class added. Wait for Admin approval`,
+          `You clicked the button!`,
+          `success`
+        );
+      }
+    });
   };
   return (
     <div>
@@ -150,15 +183,6 @@ const ClassForm = () => {
               <button className="btn btn-secondary">Add Class</button>
             </div>
           </form>
-          <label className="label">
-            <span className="">Already Have Account?</span>
-            <Link
-              to={"/login"}
-              className=" link link-hover hover:text-secondary hover:no-underline"
-            >
-              Log into Your Account
-            </Link>
-          </label>
         </div>
       </div>
     </div>
