@@ -71,7 +71,6 @@ const ClassForm = () => {
                   defaultValue={user.email}
                   type="email"
                   {...register("email", { required: true })}
-                  type="email"
                   placeholder="email"
                   className="input input-bordered"
                 />
