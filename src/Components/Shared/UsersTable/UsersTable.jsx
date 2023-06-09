@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import getUser from "../../../Hooks/getUsers";
+import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const UsersTable = () => {
   const [users, refetch] = getUser();
+  const [axiosSecure] = useAxios();
+  // const [instructor, setInstructor] = useState(false);
+  //make instructor =====
+  const makeAdmin = (user) => {
+    console.log(user);
+    axiosSecure.patch(`/users/make-admin/${user._id}`).then((data) => {
+      if (data.data.modifiedCount > 0) {
+        Swal.fire(
+          `You made ${user.name} admin`,
+          `You clicked the button!`,
+          `success`
+        );
+        refetch();
+      }
+    });
+  };
+  //make instructor =====
+  const makeInstructor = (user) => {
+    console.log(user);
+    axiosSecure.patch(`/users/make-instructor/${user._id}`).then((data) => {
+      if (data.data.modifiedCount > 0) {
+        Swal.fire(
+          `You made ${user.name} instructor`,
+          `You clicked the button!`,
+          `success`
+        );
+        refetch();
+      }
+    });
+  };
   console.log(users);
   return (
     <div className="overflow-x-auto">
@@ -47,10 +79,17 @@ const UsersTable = () => {
                 <td>{user.role}</td>
                 <th>
                   <div className="flex flex-col justify-center  gap-2">
-                    <button className="btn btn-secondary btn-xs">
+                    {/* TODO:: Button Disable */}
+                    <button
+                      onClick={() => makeInstructor(user)}
+                      className="btn btn-secondary btn-xs"
+                    >
                       Make Instructor
                     </button>
-                    <button className="btn btn-secondary btn-xs">
+                    <button
+                      onClick={() => makeAdmin(user)}
+                      className="btn btn-secondary btn-xs"
+                    >
                       Make Admin
                     </button>
                   </div>
