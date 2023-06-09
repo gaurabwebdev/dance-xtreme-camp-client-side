@@ -81,12 +81,18 @@ const UsersTable = () => {
                   <div className="flex flex-col justify-center  gap-2">
                     {/* TODO:: Button Disable */}
                     <button
+                      disabled={
+                        user?.role === "admin" || user?.role === "instructor"
+                      }
                       onClick={() => makeInstructor(user)}
                       className="btn btn-secondary btn-xs"
                     >
                       Make Instructor
                     </button>
                     <button
+                      disabled={
+                        user?.role === "admin" || user?.role === "instructor"
+                      }
                       onClick={() => makeAdmin(user)}
                       className="btn btn-secondary btn-xs"
                     >

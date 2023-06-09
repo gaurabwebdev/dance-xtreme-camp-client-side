@@ -10,7 +10,8 @@ const ClassTable = ({ classes, refetch }) => {
   console.log(location);
   // /dashboard/all-classes
   const [currentClass, setCurrentClass] = useState({});
-  const [denyClass, setDenyClass] = useState(false);
+  const [denyClass, setDenyClass] = useState({});
+  console.log(denyClass);
   const [axiosSecure] = useAxios();
   const approveClass = (classId, newStatus) => {
     axiosSecure
@@ -31,18 +32,26 @@ const ClassTable = ({ classes, refetch }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    const { class_id, status, feedback } = data;
     console.log(data);
+    axiosSecure
+      .patch(`/classes?classId=${class_id}&newStatus=${status}`, { feedback })
+      .then((data) => {
+        if (data.data.modifiedCount > 0) {
+          setDenyClass({});
+          console.log(data);
+          refetch();
+          Swal.fire(
+            `Course denied with feedback!`,
+            `You clicked the button!`,
+            `success`
+          );
+        }
+      });
   };
 
   // TODO :: Set Deny API
-  // const denyClass = (changedStatus) => {
-  //   console.log(changedStatus);
-  //   axiosSecure.patch(`/classes?status=${changedStatus}`).then((data) => {
-  //     if (data.data) {
-  //       console.log(data);
-  //     }
-  //   });
-  // };
+
   return (
     <div className="overflow-x-auto">
       <table className="table text-center">
@@ -135,8 +144,11 @@ const ClassTable = ({ classes, refetch }) => {
                     </div>
                     <div>
                       <button
-                        onClick={() => approveClass(classItem._id, "approve")}
-                        disabled={classItem.status === !"pending"}
+                        onClick={() => approveClass(classItem._id, "approved")}
+                        disabled={
+                          classItem.status === "denied" ||
+                          classItem.status === "approved"
+                        }
                         className="btn btn-outline btn-secondary btn-xs w-full"
                       >
                         Allow
@@ -144,8 +156,11 @@ const ClassTable = ({ classes, refetch }) => {
                     </div>
                     <div onClick={() => window.class_denial_modal.showModal()}>
                       <button
-                        onClick={() => setDenyClass(true)}
-                        disabled={classItem.status === !"pending"}
+                        onClick={() => setDenyClass(classItem)}
+                        disabled={
+                          classItem.status === "denied" ||
+                          classItem.status === "approved"
+                        }
                         className="btn btn-outline btn-secondary btn-xs w-full"
                       >
                         Deny
@@ -263,61 +278,76 @@ const ClassTable = ({ classes, refetch }) => {
       )}
 
       {/* Class Denial Modal */}
+      {/* TODO :: Make Modal Close */}
       {denyClass && (
         <dialog id="class_denial_modal" className="modal">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            method="dialog"
-            className="modal-box "
-          >
-            <button
-              onClick={() => setDenyClass(false)}
-              htmlFor="my-modal-3"
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 bg-secondary"
+          <div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              method="dialog"
+              className="modal-box "
             >
-              ✕
-            </button>
-            <div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Class Status</span>
-                </label>
-                <input
-                  {...register("status", { required: true })}
-                  defaultValue={"denied"}
-                  type="text"
-                  placeholder="status"
-                  className="input input-bordered"
-                />
-                {errors.status?.type === "required" && (
-                  <span className="text-red-500">Status is required</span>
-                )}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Feedback</span>
-                </label>
-                <textarea
-                  {...register("feedback", {
-                    required: true,
-                  })}
-                  className="textarea textarea-bordered"
-                  placeholder="Feedback"
-                ></textarea>
-                {errors.feedback?.type === "required" && (
-                  <span className="text-red-500">
-                    Can't Deny Without Feedback
-                  </span>
-                )}
-              </div>
+              <button
+                htmlFor="my-modal-3"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 bg-secondary"
+              >
+                ✕
+              </button>
+              <div>
+                <div className="flex flex-col lg:flex-row items-center gap-1">
+                  <div className="form-control w-full lg:w-1/2">
+                    <label className="label">
+                      <span className="label-text">Class Id</span>
+                    </label>
+                    <input
+                      {...register("class_id", { required: true })}
+                      readOnly
+                      defaultValue={denyClass?._id}
+                      type="text"
+                      placeholder="Class Id"
+                      className="input input-bordered"
+                    />
+                  </div>
+                  <div className="form-control  w-full lg:w-1/2">
+                    <label className="label">
+                      <span className="label-text">Class Status</span>
+                    </label>
+                    <input
+                      {...register("status", { required: true })}
+                      readOnly
+                      defaultValue={"denied"}
+                      type="text"
+                      placeholder="status"
+                      className="input input-bordered"
+                    />
+                  </div>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Feedback</span>
+                  </label>
+                  <textarea
+                    {...register("feedback", {
+                      required: true,
+                    })}
+                    className="textarea textarea-bordered"
+                    placeholder="Feedback"
+                  ></textarea>
+                  {errors.feedback?.type === "required" && (
+                    <span className="text-red-500">
+                      Can't Deny Without Feedback
+                    </span>
+                  )}
+                </div>
 
-              <div className="form-control mt-6">
-                <button className="btn btn-secondary">
-                  Deny & Send Feedback
-                </button>
+                <div className="form-control mt-6">
+                  <button className="btn btn-secondary">
+                    Deny & Send Feedback
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </dialog>
       )}
     </div>
