@@ -6,7 +6,7 @@ import { Navigate } from "react-router";
 const InstructorRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isInstructor, isInstructorLoading] = useInstructor();
-  if (loading || isInstructorLoading || isAdminLoading) {
+  if (loading || isInstructorLoading) {
     return (
       <div className="w-full h-full">
         <progress className="progress w-56"></progress>

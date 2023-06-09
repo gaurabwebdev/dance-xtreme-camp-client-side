@@ -25,10 +25,10 @@ const Dashboard = () => {
       {isInstructor && (
         <>
           <li>
-            <Link>My Classes</Link>
+            <Link to={"/dashboard/add-a-class"}>Add A Class</Link>
           </li>
           <li>
-            <Link>Add A Class</Link>
+            <Link>My Classes</Link>
           </li>
         </>
       )}

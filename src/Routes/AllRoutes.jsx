@@ -9,6 +9,8 @@ import DashboardContent from "../Pages/DashboardContent/DashboardContent";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../Pages/DashboardContent/AllUsers";
+import InstructorRoute from "./InstructorRoute";
+import AddClass from "../Pages/DashboardContent/AddClass/AddClass";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -51,6 +53,14 @@ const AllRoutes = createBrowserRouter([
           <AdminRoute>
             <AllUsers />
           </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/add-a-class",
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
         ),
       },
     ],
