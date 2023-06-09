@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import getInstructorClasses from "../../../Hooks/getInstructorClasses";
+import { useLocation } from "react-router-dom";
 
-const ClassTable = () => {
-  const [classes] = getInstructorClasses();
+const ClassTable = ({ classes }) => {
+  const location = useLocation();
+  console.log(location);
+  // /dashboard/all-classes
   const [currentClass, setCurrentClass] = useState({});
   return (
     <div className="overflow-x-auto">
@@ -10,17 +13,111 @@ const ClassTable = () => {
         {/* head */}
         <thead>
           <tr>
-            <th>S.N</th>
-            <th> Class Name</th>
-            <th> Instructor Name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Action</th>
+            {location.pathname === "/dashboard/all-classes" && (
+              <>
+                <th>S.N</th>
+                <th>
+                  <div>
+                    <p>Class</p>
+                    <p>Name | Image</p>
+                  </div>
+                </th>
+                <th>
+                  {" "}
+                  <div>
+                    <p>Instructor </p>
+                    <p>Name | Email</p>
+                  </div>{" "}
+                </th>
+                <th>
+                  <div>
+                    <p>Class </p>
+                    <p>Available Seats | Price</p>
+                  </div>
+                </th>
+                <th>Status</th>
+                <th>Action</th>
+              </>
+            )}
+            {location.pathname === "/dashboard/instructor-classes" && (
+              <>
+                <th>S.N</th>
+                <th> Class Name</th>
+                <th> Instructor Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
+          {/* Admin Data */}
           {classes &&
+            location.pathname === "/dashboard/all-classes" &&
+            classes.map((classItem, index) => (
+              <tr key={classItem._id}>
+                <th>
+                  <span>{index + 1}</span>
+                </th>
+                <td>
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="font-bold">{classItem.class_name}</div>
+                    <div>
+                      <img
+                        className="w-20 h-20 rounded-full"
+                        src={classItem.class_img_url}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <div className="font-bold">{classItem.name}</div>
+                    <div className="font-bold">{classItem.email}</div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <div className="font-bold">
+                      {classItem.available_seats} seats
+                    </div>
+                    <div className="font-bold">${classItem.price} USD</div>
+                  </div>
+                </td>
+                <td>{classItem.status}</td>
+                <th>
+                  <div
+                    onClick={() => setCurrentClass(classItem)}
+                    className="flex flex-col justify-center gap-1"
+                  >
+                    <button
+                      onClick={() => window.class_modal.showModal()}
+                      className="btn btn-outline btn-secondary btn-xs"
+                    >
+                      View Details
+                    </button>
+                    <button
+                      disabled={!classItem.status === "pending"}
+                      className="btn btn-outline btn-secondary btn-xs"
+                    >
+                      Allow
+                    </button>
+                    <button
+                      disabled={!classItem.status === "pending"}
+                      className="btn btn-outline btn-secondary btn-xs"
+                    >
+                      Deny
+                    </button>
+                  </div>
+                </th>
+              </tr>
+            ))}
+
+          {/* Instructor Data */}
+          {classes &&
+            location.pathname === "/dashboard/instructor-classes" &&
             classes.map((classItem, index) => (
               <tr key={classItem._id}>
                 <th>
@@ -47,8 +144,15 @@ const ClassTable = () => {
                       onClick={() => window.class_modal.showModal()}
                       className="btn btn-outline btn-secondary btn-xs"
                     >
-                      Details
+                      View Details
                     </button>
+                    {location.pathname === "/dashboard/all-classes" && (
+                      <>
+                        <button className="btn btn-outline btn-secondary btn-xs">
+                          Details
+                        </button>
+                      </>
+                    )}
                   </div>
                 </th>
               </tr>

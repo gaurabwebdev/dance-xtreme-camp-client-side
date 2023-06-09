@@ -9,7 +9,7 @@ const InstructorClasses = () => {
     <div>
       <p>Instructor Classes</p>
       <div>
-        <ClassTable />
+        <ClassTable classes={classes} />
       </div>
     </div>
   );

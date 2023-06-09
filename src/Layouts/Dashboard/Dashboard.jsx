@@ -35,7 +35,7 @@ const Dashboard = () => {
       {isAdmin && (
         <>
           <li>
-            <Link>Manage Classes</Link>
+            <Link to={"/dashboard/all-classes"}>Manage Classes</Link>
           </li>
           <li>
             <Link to={"/dashboard/allusers"}>Manage Users</Link>
