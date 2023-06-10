@@ -1,21 +1,54 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SectionTitle from "../../Components/Shared/SectionTitle/SectionTitle";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
+import useAuth from "../../Hooks/useAuth";
+import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ClassSection = ({ classInfo }) => {
+  const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const [axiosSecure] = useAxios();
+  const navigate = useNavigate();
   const [allApprovedClasses, refetch] = classInfo;
-  console.log(allApprovedClasses);
+  //   console.log(allApprovedClasses);
+  const selectClass = (currentClass) => {
+    if (currentClass && user?.email) {
+      const selectedClassData = {
+        ...currentClass,
+        userEmail: user.email,
+      };
+      axiosSecure
+        .post("/selected-classes", { selectedClassData })
+        .then((data) => {
+          if (data.data.insertedId) {
+            Swal.fire({
+              title: "Class Added Successfully!",
+              text: "",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Continue Adding",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/classes");
+              }
+            });
+          }
+        });
+    }
+  };
   const sectionInfo = {
     sub_title: "our classes",
     title: "choose your dance style",
     text: "Feel the music, get the rhythm and dance like Xtreme",
   };
   return (
-    <div className="my-12 mx-8">
+    <div className="my-32 mx-8">
       <SectionTitle sectionInfo={sectionInfo} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {allApprovedClasses &&
@@ -65,8 +98,9 @@ const ClassSection = ({ classInfo }) => {
               </div>
               <div className="m-3">
                 <button
+                  onClick={() => selectClass(classItem)}
                   disabled={
-                    classItem.available_seats < 1 || !isAdmin || isInstructor
+                    classItem.available_seats < 1 || isAdmin || isInstructor
                   }
                   className="btn btn-active btn-secondary btn-sm "
                 >

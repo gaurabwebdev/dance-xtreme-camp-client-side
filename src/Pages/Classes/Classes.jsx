@@ -5,7 +5,6 @@ import ClassSection from "./ClassSection";
 
 const Classes = () => {
   const [allApprovedClasses, refetch] = approvedClasses();
-  console.log(allApprovedClasses);
   const coverDetails = {
     title: "our classes",
     sub_title: "classes",
