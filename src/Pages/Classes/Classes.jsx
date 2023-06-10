@@ -1,6 +1,7 @@
 import React from "react";
 import approvedClasses from "../../Hooks/approvedClasses";
 import PageCover from "../../Components/Shared/PageCover/PageCover";
+import ClassSection from "./ClassSection";
 
 const Classes = () => {
   const [allApprovedClasses, refetch] = approvedClasses();
@@ -13,7 +14,7 @@ const Classes = () => {
   return (
     <div>
       <PageCover coverDetails={coverDetails} />
-      <p>All Classes</p>
+      <ClassSection classInfo={[allApprovedClasses, refetch]} />
     </div>
   );
 };
