@@ -6,14 +6,13 @@ const Header = () => {
   const navigate = useNavigate();
   const handleLogOut = () => {
     userLogOut()
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .then((error) => {
         if (error) {
           console.log(error);
         }
       });
+    navigate("/");
   };
   const menuItems = (
     <>

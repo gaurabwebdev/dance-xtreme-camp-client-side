@@ -5,9 +5,10 @@ import { FaEnvelope, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const InstructorSection = () => {
   const [allInstructors] = getInstructor();
-  const ceo = allInstructors.find(
+  const ceo = allInstructors?.filter(
     (instructor) => instructor.name === "Programming Hero"
   );
+
   console.log(ceo);
   const sectionInfo = {
     sub_title: "all instructors",
