@@ -15,6 +15,7 @@ import InstructorClasses from "../Pages/DashboardContent/InstructorClasses/Instr
 import AllClasses from "../Pages/DashboardContent/AllClasses";
 import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
+import MyClasses from "../Pages/DashboardContent/MyClasses/MyClasses";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const AllRoutes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <DashboardContent />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-selected-classes",
+        element: (
+          <PrivateRoute>
+            <MyClasses />
           </PrivateRoute>
         ),
       },

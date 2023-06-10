@@ -15,7 +15,9 @@ const Dashboard = () => {
       {user && !isInstructor && !isAdmin && (
         <>
           <li>
-            <Link>My Selected Classes</Link>
+            <Link to={"/dashboard/my-selected-classes"}>
+              My Selected Classes
+            </Link>
           </li>
           <li>
             <Link>My Enrolled Classes</Link>

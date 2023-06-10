@@ -18,8 +18,12 @@ const ClassSection = ({ classInfo }) => {
   const selectClass = (currentClass) => {
     if (currentClass && user?.email) {
       const selectedClassData = {
-        ...currentClass,
+        classId: currentClass._id,
+        className: currentClass.class_name,
+        instructorName: currentClass.name,
+        price: currentClass.price,
         userEmail: user.email,
+        status: "pending",
       };
       axiosSecure
         .post("/selected-classes", { selectedClassData })
@@ -32,10 +36,11 @@ const ClassSection = ({ classInfo }) => {
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Continue Adding",
+              cancelButtonText: "Continue Adding!",
+              confirmButtonText: "Go To Cart",
             }).then((result) => {
               if (result.isConfirmed) {
-                navigate("/classes");
+                navigate("/dashboard/my-selected-classes");
               }
             });
           }
