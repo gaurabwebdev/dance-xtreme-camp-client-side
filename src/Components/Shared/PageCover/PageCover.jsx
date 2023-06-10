@@ -9,9 +9,9 @@ const PageCover = ({ coverDetails }) => {
       style={{ backgroundImage: `url(${cover_url})` }}
     >
       <div className="w-full h-full backdrop-brightness-50 flex flex-col justify-center items-center">
-        <div className="uppercase p-5 bg-secondary bg-opacity-30 rounded-lg text-center">
-          <h2 className="text-6xl  font-semibold">{title}</h2>
-          <h4 className="text-3xl font-normal my-3 lett tracking-wider">
+        <div className="uppercase p-5  rounded-lg text-center text-white">
+          <h2 className="text-6xl font-semibold">{title}</h2>
+          <h4 className="text-3xl font-normal mt-5 mb-3 lett tracking-wider">
             Home | {sub_title}
           </h4>
         </div>
