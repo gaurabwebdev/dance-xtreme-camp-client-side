@@ -5,7 +5,7 @@ const PageCover = ({ coverDetails }) => {
   console.log(coverDetails.cover_url);
   return (
     <div
-      className="bg-cover bg-top bg-no-repeat h-[350px]"
+      className="bg-cover bg-top bg-no-repeat h-[450px]"
       style={{ backgroundImage: `url(${cover_url})` }}
     >
       <div className="w-full h-full backdrop-brightness-50 flex flex-col justify-center items-center">

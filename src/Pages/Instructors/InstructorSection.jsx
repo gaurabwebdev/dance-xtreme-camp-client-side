@@ -16,29 +16,50 @@ const InstructorSection = () => {
   };
   console.log(allInstructors);
   return (
-    <div className="px-5">
+    <div className="px-5 mb-32">
       {/* CEO Section */}
-      <div className="mt-20 mx-16 flex flex-col md:flex-row justify-around gap-5 md:gap-20">
+      <div className="my-20 mx-16 flex flex-col md:flex-row justify-around items-center gap-5 md:gap-20">
         <div>
-          <img className="rounded-lg" src={ceo.photo_url} alt="ceo-image" />
+          <img
+            className="rounded-lg  border-y-4 border-gray-800 "
+            src={ceo.photo_url}
+            alt="ceo-image"
+          />
         </div>
         <div className="flex-grow ">
-          <h1 className="mt-8 text-3xl md:text-4xl  text-secondary  font-bold uppercase">
+          <h1 className="mt-8 text-3xl md:text-4xl  text-gray-800  font-bold uppercase">
             {ceo.name}
           </h1>
           <p className="text-xl uppercase font-semibold mt-3">
             CO-Founder | Instructor
           </p>
-          <div className="my-3 flex items-center gap-2 mt-5">
-            <div className="p-2 hover:bg-gray-800  transition-all rounded-full">
-              <FaFacebook className="text-2xl text-secondary hover:text-white cursor-pointer" />
+          <div className="my-3 flex items-center gap-2 mt-5 ">
+            <div className="p-2 hover:bg-gray-800 text-secondary hover:text-white cursor-pointer  transition-all  rounded-full">
+              <FaFacebook className="text-2xl  " />
             </div>
-            <div className="p-2 hover:bg-gray-800 hover:text-white transition-all rounded-full">
-              <FaInstagram className="text-2xl text-secondary hover:text-white cursor-pointer" />
+            <div className="p-2 hover:bg-gray-800 text-secondary hover:text-white cursor-pointer  transition-all rounded-full">
+              <FaInstagram className="text-2xl  " />
             </div>
-            <div className="p-2 hover:bg-gray-800 hover:text-white transition-all rounded-full">
-              <FaTwitter className="text-2xl text-secondary hover:text-white cursor-pointer" />
+            <div className="p-2 hover:bg-gray-800 text-secondary hover:text-white cursor-pointer  transition-all rounded-full">
+              <FaTwitter className="text-2xl  " />
             </div>
+          </div>
+          <div className="max-w-[500px]">
+            <p className="text-xl font-thin mt-5">
+              Welcome to danceXtreme, the ultimate dance school where passion
+              meets movement. As the CEO, I am delighted to introduce you to our
+              exceptional summer camp program, offering an incredible array of
+              dance classes that cater to every dancer's dreams.
+            </p>
+            <p className="text-xl font-thin mt-5">
+              Join us at danceXtreme, where we believe that dance has the power
+              to inspire and empower. Unleash your passion, ignite your
+              creativity, and let your spirit soar. Together, let's make every
+              step count in the extraordinary world of dance.
+            </p>
+            <p className="text-xl font-thin mt-5">
+              Enroll today and embark on a dance journey like no other!
+            </p>
           </div>
         </div>
       </div>
