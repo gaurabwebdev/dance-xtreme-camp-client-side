@@ -16,6 +16,7 @@ import AllClasses from "../Pages/DashboardContent/AllClasses";
 import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
 import MyClasses from "../Pages/DashboardContent/MyClasses/MyClasses";
+import MakePayment from "../Pages/DashboardContent/MakePayment/MakePayment";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const AllRoutes = createBrowserRouter([
             <MyClasses />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashboard/make-a-payment",
+        element: <MakePayment />,
       },
       {
         path: "/dashboard/allusers",

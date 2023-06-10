@@ -2,6 +2,7 @@ import React from "react";
 import useCart from "../../../Hooks/useCart";
 import MyCartTable from "../MyCartTable/MyCartTable";
 import { FaWallet } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyClasses = () => {
   const [, myCart] = useCart();
@@ -18,10 +19,12 @@ const MyClasses = () => {
       </div>
 
       <div className="text-center mt-16">
-        <button className="btn btn-secondary btn-sm">
-          <FaWallet className="" />
-          Proceed To Pay
-        </button>
+        <Link to={"/dashboard/make-a-payment"}>
+          <button className="btn btn-secondary btn-sm">
+            <FaWallet className="" />
+            Proceed To Pay
+          </button>
+        </Link>
       </div>
     </div>
   );
