@@ -1,12 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
 
 const ClassForm = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [axiosSecure] = useAxios();
   const {
     register,
@@ -15,6 +16,7 @@ const ClassForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    const today = new Date();
     const {
       available_seats,
       class_img_url,
@@ -33,6 +35,8 @@ const ClassForm = () => {
       name,
       price: parseFloat(price),
       status: "pending",
+      total_enrolled_student: 0,
+      published_date: today.getDate(),
     };
     axiosSecure.post(`/classes`, newCourse).then((data) => {
       console.log(data);
@@ -42,6 +46,7 @@ const ClassForm = () => {
           `You clicked the button!`,
           `success`
         );
+        navigate("/dashboard");
       }
     });
   };

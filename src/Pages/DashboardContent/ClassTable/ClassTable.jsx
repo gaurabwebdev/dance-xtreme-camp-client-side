@@ -243,12 +243,15 @@ const ClassTable = ({ classes, refetch }) => {
                 {currentClass.class_name}
               </h3>
               <div>
-                <div>
+                <div className="relative">
                   <img
                     className="rounded w-full h-48 object-cover"
                     src={currentClass.class_img_url}
                     alt="class-cover"
                   />
+                  <div className="badge badge-secondary absolute top-2 right-2">
+                    {currentClass.status}
+                  </div>
                 </div>
                 <div className="flex justify-between items-center gap-2 mt-3">
                   <div>
@@ -257,6 +260,9 @@ const ClassTable = ({ classes, refetch }) => {
                   </div>
                   <div>
                     <p>Available Seats: {currentClass.available_seats}</p>
+                    <p>
+                      Total Enrollment: {currentClass.total_enrolled_student}
+                    </p>
                     <p>Class Fee: ${currentClass.price}</p>
                   </div>
                 </div>

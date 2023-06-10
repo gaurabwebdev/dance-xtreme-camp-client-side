@@ -74,7 +74,7 @@ const Header = () => {
                 data-tip={user.displayName}
               >
                 <img
-                  className="w-12 h-12 rounded-full cursor-pointer"
+                  className="w-12 h-12 rounded-full cursor-pointer object-cover"
                   src={user.photoURL || "https://i.ibb.co/Yhn8Q8H/user.png"}
                   alt=""
                 />
