@@ -4,7 +4,7 @@ import { FaCheckCircle, FaHandHoldingUsd } from "react-icons/fa";
 import useAxios from "../../../Hooks/useAxios";
 import useAuth from "../../../Hooks/useAuth";
 
-const CheckOutForm = ({ totalPrice }) => {
+const CheckOutForm = ({ totalPrice, myCart }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -69,6 +69,21 @@ const CheckOutForm = ({ totalPrice }) => {
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
       setTrnxId(transactionId);
+      const currentPaymentInfo = {
+        email: user?.email,
+        name: user?.displayName,
+        transactionId,
+        cartItemId: myCart.map((cartItem) => cartItem._id),
+        className: myCart.map((cartItem) => cartItem.className),
+        classId: myCart.map((cartItem) => cartItem.classId),
+        paymentDate: new Date(),
+      };
+      console.log(currentPaymentInfo);
+      axiosSecure.post("/payment", { currentPaymentInfo }).then((data) => {
+        if (data.data.insertedId) {
+          console.log(data.data);
+        }
+      });
     }
   };
   return (
@@ -79,11 +94,12 @@ const CheckOutForm = ({ totalPrice }) => {
             style: {
               base: {
                 fontSize: "16px",
-                color: "#424770",
+                color: "#CC279C",
                 "::placeholder": {
-                  color: "#aab7c4",
+                  color: "#ffffff",
                 },
               },
+
               invalid: {
                 color: "#9e2146",
               },

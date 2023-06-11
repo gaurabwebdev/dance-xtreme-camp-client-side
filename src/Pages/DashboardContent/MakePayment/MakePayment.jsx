@@ -19,7 +19,7 @@ const MakePayment = () => {
       <div>
         <div className="max-w-3xl mx-auto my-20 border-2 border-secondary p-16 bg-gray-900 rounded-lg">
           <Elements stripe={stripePromise}>
-            <CheckOutForm totalPrice={totalPrice} />
+            <CheckOutForm myCart={myCart} totalPrice={totalPrice} />
           </Elements>
         </div>
       </div>
