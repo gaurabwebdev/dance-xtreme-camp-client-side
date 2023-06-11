@@ -2,9 +2,11 @@ import React from "react";
 import getInstructor from "../../Hooks/getInstructors";
 import SectionTitle from "../../Components/Shared/SectionTitle/SectionTitle";
 import { FaEnvelope, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const InstructorSection = () => {
   const [allInstructors] = getInstructor();
+  const location = useLocation();
   const ceo = allInstructors?.filter(
     (instructor) => instructor.name === "Programming Hero"
   );
@@ -27,7 +29,7 @@ const InstructorSection = () => {
             alt="ceo-image"
           />
         </div>
-        <div className="flex-grow ">
+        <div className="flex-grow">
           <h1 className="mt-8 text-3xl md:text-4xl  text-gray-800  font-bold uppercase">
             {ceo.name}
           </h1>
@@ -70,7 +72,7 @@ const InstructorSection = () => {
       </div>
 
       {/* All Instructors Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-20 my-20">
         {allInstructors &&
           allInstructors
             .filter((instructor) => instructor.name !== "Programming Hero")
