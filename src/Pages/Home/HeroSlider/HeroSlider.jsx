@@ -10,7 +10,7 @@ const HeroSlider = () => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
+      return '<span class="' + className + '">' + "</span>";
     },
   };
   const slides = [
@@ -21,7 +21,7 @@ const HeroSlider = () => {
     {
       cover_url:
         "https://dance2inspire.co.uk/wp-content/uploads/2019/07/slider-kids-1.jpg",
-      cover_title: "Feel The Music & Have The Rhythm",
+      cover_title: "Feel The Music With Rhythm",
     },
     {
       cover_url: "https://i.ibb.co/6sQkpw8/dance-cover-8.jpg",
