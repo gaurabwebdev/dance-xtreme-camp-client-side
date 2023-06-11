@@ -25,7 +25,7 @@ const HeroSlider = () => {
     },
     {
       cover_url: "https://i.ibb.co/6sQkpw8/dance-cover-8.jpg",
-      cover_title: "Let The World Cheer!",
+      cover_title: "Let The World Cheer For You!",
     },
     {
       cover_url:
@@ -40,18 +40,11 @@ const HeroSlider = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <SlideItem slideContent={slides[0]} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SlideItem slideContent={slides[1]} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SlideItem slideContent={slides[2]} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SlideItem slideContent={slides[3]} />
-        </SwiperSlide>
+        {slides.map((item, index) => (
+          <SwiperSlide key={index}>
+            <SlideItem slideContent={item}></SlideItem>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
