@@ -17,6 +17,7 @@ import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
 import MyClasses from "../Pages/DashboardContent/MyClasses/MyClasses";
 import MakePayment from "../Pages/DashboardContent/MakePayment/MakePayment";
+import EnrolledClasses from "../Pages/DashboardContent/EnrolledClasses/EnrolledClasses";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -66,6 +67,14 @@ const AllRoutes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyClasses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-enrolled-classes",
+        element: (
+          <PrivateRoute>
+            <EnrolledClasses />
           </PrivateRoute>
         ),
       },

@@ -17,7 +17,7 @@ const Header = () => {
   const menuItems = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
         <Link to={"/instructors"}>Instructors</Link>

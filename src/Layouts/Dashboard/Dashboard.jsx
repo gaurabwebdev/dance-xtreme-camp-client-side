@@ -20,7 +20,9 @@ const Dashboard = () => {
             </Link>
           </li>
           <li>
-            <Link>My Enrolled Classes</Link>
+            <Link to={"/dashboard/my-enrolled-classes"}>
+              My Enrolled Classes
+            </Link>
           </li>
         </>
       )}

@@ -77,6 +77,7 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
         className: myCart.map((cartItem) => cartItem.className),
         classId: myCart.map((cartItem) => cartItem.classId),
         paymentDate: new Date(),
+        price: totalPrice,
       };
       console.log(currentPaymentInfo);
       axiosSecure.post("/payment", { currentPaymentInfo }).then((data) => {
