@@ -3,15 +3,13 @@ import useAuth from "../Hooks/useAuth";
 
 import useAdmin from "../Hooks/useAdmin";
 import { Navigate } from "react-router";
+import LoadingSpinner from "../Components/LoadingSpinner/LoadingSpinner";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
 
   if (loading || isAdminLoading) {
-    // <div className="w-full h-full">
-    //   <progress className="progress w-56"></progress>
-    // </div>
     <LoadingSpinner />;
   } else if (user && isAdmin) {
     return children;

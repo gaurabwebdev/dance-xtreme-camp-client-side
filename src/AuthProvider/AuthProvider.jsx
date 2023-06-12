@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkUser = onAuthStateChanged(auth, (presentUser) => {
       console.log(presentUser);
-      setUser(presentUser);
+
       if (presentUser) {
         axios
           .post("https://dance-xtreme-school-server-site.vercel.app/jwt", {
@@ -57,6 +57,8 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             if (data.data.jwToken) {
               localStorage.setItem("accessJwt", data.data.jwToken);
+              setUser(presentUser);
+              setLoading(false);
             }
           })
           .catch((error) => {
@@ -64,10 +66,10 @@ const AuthProvider = ({ children }) => {
               console.log(error.message);
             }
           });
-
-        setLoading(false);
       } else {
         localStorage.removeItem("accessJwt");
+        setUser(presentUser);
+        setLoading(false);
       }
     });
     return () => {
