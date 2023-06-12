@@ -14,7 +14,6 @@ const PopularClasses = () => {
       return data;
     },
   });
-  console.log(popularClass);
   const sectionInfo = {
     sub_title: "Classes On High Demand",
     title: "Xtremer's Popular Classes",

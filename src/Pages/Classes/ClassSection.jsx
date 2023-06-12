@@ -13,8 +13,7 @@ const ClassSection = ({ classInfo }) => {
   const [isInstructor] = useInstructor();
   const [axiosSecure] = useAxios();
   const navigate = useNavigate();
-  const [allApprovedClasses, refetch] = classInfo;
-  //   console.log(allApprovedClasses);
+  const [allApprovedClasses] = classInfo;
   const selectClass = (currentClass) => {
     if (currentClass && user?.email) {
       const selectedClassData = {

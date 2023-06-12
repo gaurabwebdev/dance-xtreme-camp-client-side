@@ -24,7 +24,6 @@ const Login = () => {
   const onSubmit = (data) => {
     userLogin(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
         navigate(targetRoute, { replace: true });
       })
       .then((error) => {

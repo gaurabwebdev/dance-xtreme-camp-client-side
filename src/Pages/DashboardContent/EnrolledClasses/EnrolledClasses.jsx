@@ -4,7 +4,6 @@ import EnrolledClassDetails from "./EnrolledClassDetails";
 
 const EnrolledClasses = () => {
   const [enrolledClasses] = getEnrolledClasses();
-  console.log(enrolledClasses);
   return (
     <div>
       <p>Total Enrolled Classes: {enrolledClasses?.length}</p>

@@ -11,13 +11,11 @@ const InstructorSection = () => {
     (instructor) => instructor.name === "Programming Hero"
   );
 
-  console.log(ceo);
   const sectionInfo = {
     sub_title: "all instructors",
     title: "Meet With Our Instructors",
     text: "= = =Learn from the best= = =",
   };
-  console.log(allInstructors);
   return (
     <div className="px-5 mb-32">
       {/* CEO Section */}

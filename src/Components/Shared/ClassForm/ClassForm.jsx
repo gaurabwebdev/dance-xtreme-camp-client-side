@@ -39,7 +39,6 @@ const ClassForm = () => {
       published_date: today.getDate(),
     };
     axiosSecure.post(`/classes`, newCourse).then((data) => {
-      console.log(data);
       if (data.data.insertedId) {
         Swal.fire(
           `New class added. Wait for Admin approval`,

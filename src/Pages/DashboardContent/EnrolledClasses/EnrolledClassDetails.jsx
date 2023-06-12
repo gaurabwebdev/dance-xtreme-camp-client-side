@@ -1,7 +1,6 @@
 import React from "react";
 
 const EnrolledClassDetails = ({ enrolledClasses }) => {
-  console.log(enrolledClasses);
   return (
     <div className="overflow-x-auto mt-12 mx-10 p-3">
       <table className="table text-center">

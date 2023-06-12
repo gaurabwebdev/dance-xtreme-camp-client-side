@@ -9,7 +9,6 @@ const UsersTable = () => {
   // const [instructor, setInstructor] = useState(false);
   //make instructor =====
   const makeAdmin = (user) => {
-    console.log(user);
     axiosSecure.patch(`/users/make-admin/${user._id}`).then((data) => {
       if (data.data.modifiedCount > 0) {
         Swal.fire(
@@ -23,7 +22,6 @@ const UsersTable = () => {
   };
   //make instructor =====
   const makeInstructor = (user) => {
-    console.log(user);
     axiosSecure.patch(`/users/make-instructor/${user._id}`).then((data) => {
       if (data.data.modifiedCount > 0) {
         Swal.fire(
@@ -35,7 +33,7 @@ const UsersTable = () => {
       }
     });
   };
-  console.log(users);
+
   return (
     <div className="overflow-x-auto">
       <table className="table text-center">

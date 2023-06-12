@@ -19,7 +19,6 @@ const MyCartTable = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axiosSecure.delete(`/selected-classes/${classId}`).then((data) => {
-            console.log(data.data);
             if (data.data.deletedCount > 0) {
               refetch();
               Swal.fire({

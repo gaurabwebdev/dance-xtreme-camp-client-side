@@ -18,7 +18,6 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     if (data) {
       const {
         Gender,
@@ -47,14 +46,6 @@ const Registration = () => {
           if (createdUser) {
             setUserProfile(first_name, last_name, photo_url)
               .then(() => {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Account Created Successfully",
-                  showConfirmButton: false,
-                  timer: 2000,
-                });
-
                 axios
                   .post(
                     "https://dance-xtreme-school-server-site.vercel.app/users",
@@ -62,7 +53,13 @@ const Registration = () => {
                   )
                   .then((data) => {
                     if (data.data.insertedId) {
-                      console.log(data);
+                      Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Account Created Successfully",
+                        showConfirmButton: false,
+                        timer: 2000,
+                      });
                     }
                   })
                   .catch((error) => {

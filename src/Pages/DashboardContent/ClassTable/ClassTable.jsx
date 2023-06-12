@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 
 const ClassTable = ({ classes, refetch }) => {
   const location = useLocation();
-  console.log(location);
   // /dashboard/all-classes
   const [currentClass, setCurrentClass] = useState({});
   const [denyClass, setDenyClass] = useState({});
@@ -18,7 +17,6 @@ const ClassTable = ({ classes, refetch }) => {
       .patch(`/classes?classId=${classId}&newStatus=${newStatus}`)
       .then((data) => {
         if (data.data.modifiedCount > 0) {
-          console.log(data);
           refetch();
           Swal.fire(`Course Approved!`, `You clicked the button!`, `success`);
         }
@@ -33,13 +31,11 @@ const ClassTable = ({ classes, refetch }) => {
 
   const onSubmit = (data) => {
     const { class_id, status, feedback } = data;
-    console.log(data);
     axiosSecure
       .patch(`/classes?classId=${class_id}&newStatus=${status}`, { feedback })
       .then((data) => {
         if (data.data.modifiedCount > 0) {
           setDenyClass({});
-          console.log(data);
           refetch();
           Swal.fire(
             `Course denied with feedback!`,

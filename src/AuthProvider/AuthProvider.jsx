@@ -47,7 +47,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkUser = onAuthStateChanged(auth, (presentUser) => {
-      console.log(presentUser);
       setUser(presentUser);
       if (presentUser) {
         axios

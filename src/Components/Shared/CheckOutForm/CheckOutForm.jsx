@@ -3,6 +3,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { FaCheckCircle, FaHandHoldingUsd } from "react-icons/fa";
 import useAxios from "../../../Hooks/useAxios";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const CheckOutForm = ({ totalPrice, myCart }) => {
   const { user } = useAuth();
@@ -26,7 +27,6 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
   }, [totalPrice]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("connected");
     if (!stripe || !elements) {
       return;
     }
@@ -36,8 +36,6 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
       return;
     }
 
-    console.log(card);
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -46,7 +44,6 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
       console.log("Error ", error);
       setCardError(error.message);
     } else {
-      console.log("Payment Mehtod ", paymentMethod);
       setCardError("");
     }
     setPaymentProcessing(true);
@@ -64,7 +61,6 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
     if (confirmError) {
       console.log(confirmError);
     }
-    console.log(paymentIntent);
     setPaymentProcessing(false);
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
@@ -79,10 +75,15 @@ const CheckOutForm = ({ totalPrice, myCart }) => {
         paymentDate: new Date(),
         price: totalPrice,
       };
-      console.log(currentPaymentInfo);
       axiosSecure.post("/payment", { currentPaymentInfo }).then((data) => {
         if (data.data.insertedId) {
-          console.log(data.data);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
     }

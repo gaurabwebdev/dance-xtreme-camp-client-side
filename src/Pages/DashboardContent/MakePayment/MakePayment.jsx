@@ -11,7 +11,6 @@ const MakePayment = () => {
   const totalPrice = parseFloat(
     myCart.reduce((sum, cartItem) => sum + cartItem.price, 0).toFixed(2)
   );
-  console.log(totalPrice);
   return (
     <div>
       <p>Make Payment</p>

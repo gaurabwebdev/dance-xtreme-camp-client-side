@@ -2,7 +2,6 @@ import React from "react";
 
 const PageCover = ({ coverDetails }) => {
   const { title, sub_title, cover_url } = coverDetails;
-  console.log(coverDetails.cover_url);
   return (
     <div
       className="bg-cover bg-top bg-no-repeat h-[450px]"
