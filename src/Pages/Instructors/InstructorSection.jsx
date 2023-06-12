@@ -24,8 +24,8 @@ const InstructorSection = () => {
       <div className="my-20 mx-16 flex flex-col md:flex-row justify-around items-center gap-5 md:gap-20">
         <div>
           <img
-            className="rounded-lg  border-y-4 border-gray-800"
-            src={ceo.photo_url}
+            className="rounded-lg  border-y-4 border-gray-800 w-full lg:max-w-lg"
+            src={ceo?.photo_url || "https://i.ibb.co/9N2FzW0/ceo.jpg"}
             alt="ceo-image"
           />
         </div>
