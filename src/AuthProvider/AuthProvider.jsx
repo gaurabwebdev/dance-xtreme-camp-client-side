@@ -52,7 +52,9 @@ const AuthProvider = ({ children }) => {
         setUser(presentUser);
         if (presentUser) {
           axios
-            .post("http://localhost:5000/jwt", { email: presentUser?.email })
+            .post("https://dance-xtreme-school-server-site.vercel.app/jwt", {
+              email: presentUser?.email,
+            })
             .then((data) => {
               if (data.data.jwToken) {
                 localStorage.setItem("accessJwt", data.data.jwToken);

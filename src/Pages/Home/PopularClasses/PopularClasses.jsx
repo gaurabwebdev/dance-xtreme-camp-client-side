@@ -7,7 +7,9 @@ const PopularClasses = () => {
   const { data: popularClass = [] } = useQuery({
     queryKey: ["popularClass"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/get-popular-classes`);
+      const res = await fetch(
+        `https://dance-xtreme-school-server-site.vercel.app/get-popular-classes`
+      );
       const data = res.json();
       return data;
     },

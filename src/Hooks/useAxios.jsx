@@ -7,7 +7,7 @@ const useAxios = () => {
   const { userLogOut } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://dance-xtreme-school-server-site.vercel.app",
   });
 
   useEffect(() => {

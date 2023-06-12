@@ -56,7 +56,10 @@ const Registration = () => {
                 });
 
                 axios
-                  .post("http://localhost:5000/users", newUser)
+                  .post(
+                    "https://dance-xtreme-school-server-site.vercel.app/users",
+                    newUser
+                  )
                   .then((data) => {
                     if (data.data.insertedId) {
                       console.log(data);

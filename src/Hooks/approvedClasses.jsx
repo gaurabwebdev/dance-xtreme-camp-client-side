@@ -6,7 +6,9 @@ const approvedClasses = () => {
   const { data: allApprovedClasses = [], refetch } = useQuery({
     queryKey: ["allApprovedClasses"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/all-classes");
+      const res = await axios.get(
+        "https://dance-xtreme-school-server-site.vercel.app/all-classes"
+      );
       return res.data;
     },
   });
