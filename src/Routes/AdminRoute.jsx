@@ -9,9 +9,10 @@ const AdminRoute = ({ children }) => {
   const [isAdmin, isAdminLoading] = useAdmin();
 
   if (loading || isAdminLoading) {
-    <div className="w-full h-full">
-      <progress className="progress w-56"></progress>
-    </div>;
+    // <div className="w-full h-full">
+    //   <progress className="progress w-56"></progress>
+    // </div>
+    <LoadingSpinner />;
   } else if (user && isAdmin) {
     return children;
   }

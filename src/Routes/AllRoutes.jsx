@@ -81,7 +81,11 @@ const AllRoutes = createBrowserRouter([
       },
       {
         path: "/dashboard/make-a-payment",
-        element: <MakePayment />,
+        element: (
+          <PrivateRoute>
+            <MakePayment />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/allusers",
@@ -109,7 +113,11 @@ const AllRoutes = createBrowserRouter([
       },
       {
         path: "/dashboard/instructor-classes",
-        element: <InstructorClasses />,
+        element: (
+          <InstructorRoute>
+            <InstructorClasses />
+          </InstructorRoute>
+        ),
       },
     ],
   },

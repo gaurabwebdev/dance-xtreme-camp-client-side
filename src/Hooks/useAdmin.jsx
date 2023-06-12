@@ -5,11 +5,12 @@ import { async } from "@firebase/util";
 import useAxios from "./useAxios";
 
 const useAdmin = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const [axiosSecure] = useAxios();
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
     queryKey: ["isAdmin", user?.email],
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/admin/${user?.email}`);
       // console.log("res from use admin ", res);

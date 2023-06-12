@@ -8,12 +8,12 @@ const InstructorRoute = ({ children }) => {
   const [isInstructor, isInstructorLoading] = useInstructor();
   if (loading || isInstructorLoading) {
     return (
-      <div className="w-full h-full">
-        <progress className="progress w-56"></progress>
-      </div>
+      // <div className="w-full h-full">
+      //   <progress className="progress w-56"></progress>
+      // </div>
+      <LoadingSpinner />
     );
-    // TODO:: remove isAdmin
-  } else if (user && isInstructor) {
+  } else if (!user && !isInstructor) {
     return children;
   }
   return <Navigate to={"/"} replace></Navigate>;
