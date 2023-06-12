@@ -14,7 +14,7 @@ const InstructorRoute = ({ children }) => {
       // </div>
       <LoadingSpinner />
     );
-  } else if (!user && !isInstructor) {
+  } else if (user && isInstructor) {
     return children;
   }
   return <Navigate to={"/"} replace></Navigate>;

@@ -57,35 +57,19 @@ const AllRoutes = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <DashboardContent />
-          </PrivateRoute>
-        ),
+        element: <DashboardContent />,
       },
       {
         path: "/dashboard/my-selected-classes",
-        element: (
-          <PrivateRoute>
-            <MyClasses />
-          </PrivateRoute>
-        ),
+        element: <MyClasses />,
       },
       {
         path: "/dashboard/my-enrolled-classes",
-        element: (
-          <PrivateRoute>
-            <EnrolledClasses />
-          </PrivateRoute>
-        ),
+        element: <EnrolledClasses />,
       },
       {
         path: "/dashboard/make-a-payment",
-        element: (
-          <PrivateRoute>
-            <MakePayment />
-          </PrivateRoute>
-        ),
+        element: <MakePayment />,
       },
       {
         path: "/dashboard/allusers",

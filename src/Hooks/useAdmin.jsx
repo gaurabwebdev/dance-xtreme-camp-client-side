@@ -10,7 +10,7 @@ const useAdmin = () => {
   const [axiosSecure] = useAxios();
   const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
     queryKey: ["isAdmin", user?.email],
-    enabled: !loading,
+    enabled: !loading && !!user?.email && !!localStorage.getItem("accessJwt"),
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/admin/${user?.email}`);
       // console.log("res from use admin ", res);

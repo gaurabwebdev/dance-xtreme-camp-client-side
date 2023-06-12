@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
   const [isAdmin, isAdminLoading] = useAdmin();
 
   if (loading || isAdminLoading) {
-    <LoadingSpinner />;
+    return <LoadingSpinner />;
   } else if (user && isAdmin) {
     return children;
   }
