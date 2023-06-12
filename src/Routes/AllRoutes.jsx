@@ -18,6 +18,7 @@ import Instructors from "../Pages/Instructors/Instructors";
 import MyClasses from "../Pages/DashboardContent/MyClasses/MyClasses";
 import MakePayment from "../Pages/DashboardContent/MakePayment/MakePayment";
 import EnrolledClasses from "../Pages/DashboardContent/EnrolledClasses/EnrolledClasses";
+import ErrorPage from "../Layouts/ErrorPage/ErrorPage";
 
 const AllRoutes = createBrowserRouter([
   {
@@ -111,6 +112,10 @@ const AllRoutes = createBrowserRouter([
         element: <InstructorClasses />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 
