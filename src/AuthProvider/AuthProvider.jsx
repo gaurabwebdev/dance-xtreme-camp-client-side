@@ -46,32 +46,30 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const checkUser = () => {
-      onAuthStateChanged(auth, (presentUser) => {
-        console.log(presentUser);
-        setUser(presentUser);
-        if (presentUser) {
-          axios
-            .post("https://dance-xtreme-school-server-site.vercel.app/jwt", {
-              email: presentUser?.email,
-            })
-            .then((data) => {
-              if (data.data.jwToken) {
-                localStorage.setItem("accessJwt", data.data.jwToken);
-              }
-            })
-            .catch((error) => {
-              if (error) {
-                console.log(error.message);
-              }
-            });
+    const checkUser = onAuthStateChanged(auth, (presentUser) => {
+      console.log(presentUser);
+      setUser(presentUser);
+      if (presentUser) {
+        axios
+          .post("https://dance-xtreme-school-server-site.vercel.app/jwt", {
+            email: presentUser?.email,
+          })
+          .then((data) => {
+            if (data.data.jwToken) {
+              localStorage.setItem("accessJwt", data.data.jwToken);
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              console.log(error.message);
+            }
+          });
 
-          setLoading(false);
-        } else {
-          localStorage.removeItem("accessJwt");
-        }
-      });
-    };
+        setLoading(false);
+      } else {
+        localStorage.removeItem("accessJwt");
+      }
+    });
     return () => {
       checkUser();
     };
