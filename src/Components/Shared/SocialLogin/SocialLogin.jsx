@@ -53,7 +53,7 @@ const SocialLogin = ({ targetRoute }) => {
   };
   return (
     <div>
-      <div className="divider">
+      <div className="divider ">
         OR{" "}
         {(path === "/login" && "Login With") ||
           (location.pathname === "/registration" && "Create Account With")}{" "}
